@@ -72,3 +72,10 @@
   - if we replace `print(box.retrieve())` with `print(box.increment())`, we will get `AttributeError: Contract 'Box' object has no attribute 'increment'`
 
 **Commit 1**
+
+## Hooking up proxy contract Box2.py to Box.py
+
+- `encode_function_data()` in helpful_scripts.py
+- `$brownie run scripts/01_deploy_box.py`
+
+**Commit 2**

@@ -1,4 +1,5 @@
 from brownie import network, accounts, config
+import eth_utils
 
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
     "mainnet-fork",
@@ -16,3 +17,21 @@ def get_account(number=None):
         account = accounts.add(config["wallets"]["from_key"])
         return account
     return None
+
+
+# initializer - box.store, 1
+def encode_function_data(initializer=None, *args):
+    """Encodes the function call so we can work with an initializer.
+    Args:
+        initializer ([brownie.network.contract.ContractTx], optional):
+        The initializer function we want to call. Example: `box.store`.
+        Defaults to None.
+        args (Any, optional):
+        The arguments to pass to the initializer function
+    Returns:
+        [bytes]: Return the encoded bytes.
+    """
+    if len(args) == 0 or not initializer:
+        return eth_utils.to_bytes(hexstr="0x")
+    else:
+        return initializer.encode_input(*args)
