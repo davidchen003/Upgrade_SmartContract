@@ -79,3 +79,14 @@
 - `$brownie run scripts/01_deploy_box.py`
 
 **Commit 2**
+
+## Upgrade
+
+- `upgrade()` in helpful_scripts.py
+- `02_deploy_and_upgrade.py`
+  - copy `01_deploy_box.py`
+  - deploy BoxV2
+- `$brownie run scripts/02_deploy_and_upgrade.py`
+  - BoxV2 function `increment()` is executed!
+
+**Commit 3**
