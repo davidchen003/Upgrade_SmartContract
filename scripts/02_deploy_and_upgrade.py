@@ -14,14 +14,12 @@ from scripts.helpful_scripts import get_account, encode_function_data, upgrade
 def main():
     account = get_account()
     print(f"Deploying to {network.show_active()}")
-    box = Box.deploy(
-        {"from": account},
-    )
+    box = Box.deploy({"from": account}, publish_source=True)
     # print(box.retrieve())
     # print(box.increment())
 
     # Optional, deploy the ProxyAdmin and use that as the admin contract
-    proxy_admin = ProxyAdmin.deploy({"from": account})
+    proxy_admin = ProxyAdmin.deploy({"from": account}, publish_source=True)
 
     # Proxies don't have constructor (on purpose), in stead if neede,
     # we have have initializer functions
@@ -40,6 +38,7 @@ def main():
         proxy_admin.address,
         box_encoded_initializer_function,
         {"from": account, "gas_limit": 1000000},
+        publish_source=True,
     )
     print(f"Proxy deployed to {proxy} ! You can now upgrade it to BoxV2!")
 
@@ -50,7 +49,7 @@ def main():
     proxy_box.store(1, {"from": account})
     print(f"Here is the updated value in the Box: {proxy_box.retrieve()}")
 
-    box_v2 = BoxV2.deploy({"from": account})
+    box_v2 = BoxV2.deploy({"from": account}, publish_source=True)
     upgrade_tx = upgrade(account, proxy, box_v2, proxy_admin_contract=proxy_admin)
     upgrade_tx.wait(1)
     print("Proxy has been upgraded!")

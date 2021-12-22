@@ -90,3 +90,22 @@
   - BoxV2 function `increment()` is executed!
 
 **Commit 3**
+
+## Tests
+
+- `tests/test_box_proxy.py`
+- `$brownie test`
+- `tests/test_box_v2_upgrades.py`
+- `$brownie test -k test_box_v2_upgrades.py`
+
+## Deploy to testnet
+
+- add `publish_source=True` to deployments
+- add `rinkeby` testnet to brownie-config
+- make sure MetaMast is open, on Rinkeby testnet
+- `$brownie run scripts/02_deploy_and_upgrade.py --network rinkeby`
+  - Box deployed at: 0x66212aE4C3F2fB2db04a235B2F6ea9fD7142e9Fe
+  - ProxyAdmin deployed at: 0x8C2e2BC8Ae9c1b08044e9904c716d717d12a2C81
+  - however, the rest didn't go through, errors
+
+**Commit 4**
